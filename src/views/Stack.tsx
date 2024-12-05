@@ -1,30 +1,25 @@
-import { Divider, Stack, Paper } from "@mui/material";
-import { styled } from '@mui/material/styles';
+import { Divider, Stack, Paper, Typography, Box } from "@mui/material";
 
-const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-    ...theme.applyStyles('dark', {
-      backgroundColor: '#1A2027',
-    }),
-  }));
-  
+interface SimpleStackProps{
+    items: string[]
+}
 
-const SimpleStack = (items: string[]) => {
-
+const SimpleStack: React.FC<SimpleStackProps> = ({items}) => {
     return (
         <div>
-            <Stack 
-                direction={'row'}
-                divider={<Divider orientation="vertical" flexItem/>}
-                spacing={2}>
-                <Item>
-                    {items.map((items) => items)}
-                </Item>
-            </Stack>
+            <Box sx={{ width: '100%', backgroundColor: 'white' }}>
+                <Stack
+                    direction={"row"}
+                    divider={<Divider orientation="vertical" color='white' flexItem />}
+                    spacing={1}
+                >
+                    {items.map((item, index) => (
+                        <Typography key={index} variant="body1" color="black">
+                            {item}
+                        </Typography>
+                    ))}
+                </Stack>
+            </Box>
         </div>
     );
 }

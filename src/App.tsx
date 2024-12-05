@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import './App.css';
 import './styles.css';
-import DateTimeAPI from './views/DateTime';
+import DateTime from './views/DateTime';
 import PrayersTable from './views/PrayersTable';
 import IslamicCalendar from './views/IslamicCalendar';
 import RelatedResources from './views/RelatedResources';
-import { useLocation } from './hooks/useLocation';
 import { Button } from '@mui/material';
+import GeoAddress from './views/GeoAddress';
 
 const content = [
   [
@@ -23,15 +23,13 @@ const content = [
 function App() {
 
   const [activeContentIdx, setActiveContentIdx] = useState(0);
-  const currentLocation = useLocation();
-  console.log(currentLocation)
-
   return (
     <div>
       <header>
         <div>
         <h1>Prayers Timetable</h1>
-        <DateTimeAPI></DateTimeAPI>
+        <DateTime></DateTime>
+        <GeoAddress></GeoAddress>
         </div>
       </header>
       <div id='tabs'>
@@ -58,7 +56,7 @@ function App() {
         <div id="tab-content">
             <ul>
               {content[activeContentIdx].map((item) => 
-                <li style={{listStyle: "none"}}> 
+                <li id= "tab-content li" style={{listStyle: "none"}}> 
                     {item}
                 </li>
               )}
