@@ -10,15 +10,18 @@ import useFetchData  from '../hooks/useFetchData';
 import { Timings } from '../interfaces/prayers';
 import { additional } from './Constants';
 import TimeFormatTo12 from '../helpers/TimeFormatTo12';
+import { Box, CircularProgress, Typography } from '@mui/material';
+import { useLocation } from '../hooks/useLocation';
 
 export default function PrayersTable() {
+  const {latitude, longitude } = useLocation(); 
   const {getPrayerTimesLocation} = useFetchData();
   const [prayersTimes, setPrayersTimes] = React.useState<Timings>();
 
   React.useEffect(() => {
     (async (): Promise<void>  => {
       try {
-          const data = await getPrayerTimesLocation();
+          const data = await getPrayerTimesLocation(latitude, longitude);
           const timings: Timings | undefined =  data?.timings;
           if(timings !== undefined){
             setPrayersTimes(timings)
@@ -27,7 +30,7 @@ export default function PrayersTable() {
           console.error('Error in fetchPrayerTimes:', error);
       }
   })();
-  }, [true])
+  }, [latitude, longitude])
 
   console.log('prayer times: ', prayersTimes);
   
@@ -35,12 +38,17 @@ export default function PrayersTable() {
       ([prayer]) => !additional.includes(prayer)) : [];
   
   return (
-    <TableContainer component={Paper}>
+    <div>
+    <TableContainer component={Paper} sx={{maxWidth: '280px', alignItems: 'center', textAlign: 'center'}}>
     <Table sx={{ maxWidth: 250 }} aria-label="simple table" align="left">
       <TableHead>
         <TableRow>
-          <TableCell>Prayers</TableCell>
-          <TableCell align="right">Times</TableCell>
+          <TableCell >
+            <Typography sx={{fontWeight: 'bold'}}>Prayers</Typography>
+          </TableCell>
+          <TableCell align="right">
+            <Typography sx={{fontWeight: 'bold'}}>Times</Typography>
+            </TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
@@ -59,13 +67,16 @@ export default function PrayersTable() {
     ) : (
         <TableRow>
             <TableCell colSpan={2} align="center">
-                Loading prayer times...
+              <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100px' }}>
+                  <CircularProgress/>
+              </Box>
             </TableCell>
         </TableRow>
     )}
       </TableBody>
     </Table>
   </TableContainer>
+  </div>
   );
 }
 

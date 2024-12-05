@@ -1,9 +1,6 @@
-import React from "react";
 import { useEffect, useState } from "react";
 
-
-const DateTimeAPI = () => {
-
+const DateTime = () => {
     const [date, setDate] = useState(new Date());
     useEffect(() => {
         const id = setInterval(() => {
@@ -34,4 +31,4 @@ const DateTimeAPI = () => {
     );    
 }
 
-export default DateTimeAPI;
+export default DateTime;
