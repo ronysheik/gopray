@@ -27,7 +27,7 @@ function App() {
     <div>
       <header>
         <div>
-        <h1>Prayers Timetable</h1>
+        <h1>Islamic Prayers</h1>
         <DateTime></DateTime>
         <GeoAddress></GeoAddress>
         </div>

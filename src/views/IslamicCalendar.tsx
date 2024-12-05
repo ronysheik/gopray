@@ -37,7 +37,7 @@ const IslamicCalendar = () => {
         {hijriInfo.length > 0 ? (
            <SimpleStack items={hijriInfo}/>
         ) : (
-            <Box sx={{ display: 'flex' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100px'}}>
                 <CircularProgress sx={{alignItems: 'center'}}/>
             </Box>
         )}

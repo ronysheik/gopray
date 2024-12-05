@@ -38,7 +38,8 @@ export default function PrayersTable() {
       ([prayer]) => !additional.includes(prayer)) : [];
   
   return (
-    <TableContainer component={Paper}>
+    <div>
+    <TableContainer component={Paper} sx={{maxWidth: '280px', alignItems: 'center', textAlign: 'center'}}>
     <Table sx={{ maxWidth: 250 }} aria-label="simple table" align="left">
       <TableHead>
         <TableRow>
@@ -66,8 +67,8 @@ export default function PrayersTable() {
     ) : (
         <TableRow>
             <TableCell colSpan={2} align="center">
-              <Box sx={{ display: 'flex' }}>
-                  <CircularProgress />
+              <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100px' }}>
+                  <CircularProgress/>
               </Box>
             </TableCell>
         </TableRow>
@@ -75,6 +76,7 @@ export default function PrayersTable() {
       </TableBody>
     </Table>
   </TableContainer>
+  </div>
   );
 }
 
