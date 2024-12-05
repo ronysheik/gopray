@@ -20,5 +20,3 @@ export enum apiEndpoint {
     OPEN_STREET_BASE='reverse?'
 }
 
-export const GOOGLE_API_KEY = 'AIzaSyCUTrZqIsF20SI_RCgcn_zJVAyQ_pvIYJk';
-
