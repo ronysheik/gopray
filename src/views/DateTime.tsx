@@ -11,7 +11,8 @@ const DateTime = () => {
     }, [])
 
     return (
-        <div>
+        <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}
+>
             <h2 className="date">
                 {date.toLocaleDateString("en-US", {
                     year: "numeric",

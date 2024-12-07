@@ -4,14 +4,17 @@
 
 body {
   font-family: sans-serif;
-  background-color: #2a3d4d;
+  background-color: #0a1925;
   color: #bdd1d4;
   margin: 2rem;
 }
 
 header h1 {
+  display: flex;
   margin: 0;
   color: #038535;
+  align-items: center;
+  justify-content: center;
 }
 
 #tabs {

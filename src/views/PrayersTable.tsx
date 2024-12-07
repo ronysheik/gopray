@@ -1,81 +1,64 @@
 import * as React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import useFetchData  from '../hooks/useFetchData';
 import { Timings } from '../interfaces/prayers';
 import { additional } from './Constants';
 import TimeFormatTo12 from '../helpers/TimeFormatTo12';
 import { Box, CircularProgress, Typography } from '@mui/material';
-import { useLocation } from '../hooks/useLocation';
+import { FetchDataContext } from '../contexts/FetchDataContext';
+import Cards from './Cards';
 
 export default function PrayersTable() {
-  const {latitude, longitude } = useLocation(); 
-  const {getPrayerTimesLocation} = useFetchData();
-  const [prayersTimes, setPrayersTimes] = React.useState<Timings>();
+  const fetchDataContext = React.useContext(FetchDataContext);
 
-  React.useEffect(() => {
-    (async (): Promise<void>  => {
-      try {
-          const data = await getPrayerTimesLocation(latitude, longitude);
-          const timings: Timings | undefined =  data?.timings;
-          if(timings !== undefined){
-            setPrayersTimes(timings)
-          }
-      } catch (error) {
-          console.error('Error in fetchPrayerTimes:', error);
-      }
-  })();
-  }, [latitude, longitude])
+  if(!fetchDataContext){
+    throw new Error("useContext must be used within a FetchDataProvider")
+  }
 
-  console.log('prayer times: ', prayersTimes);
+  const timingData = fetchDataContext.data;
+  if(!timingData){
+    return null;
+  }
+
+  const prayerTimes: Timings = timingData.timings;
+  console.log('prayer times: ', prayerTimes);
   
-  const filteredItems = prayersTimes ? Object.entries(prayersTimes).filter(
+  const filteredItems = prayerTimes ? Object.entries(prayerTimes).filter(
       ([prayer]) => !additional.includes(prayer)) : [];
   
   return (
     <div>
-    <TableContainer component={Paper} sx={{maxWidth: '280px', alignItems: 'center', textAlign: 'center'}}>
-    <Table sx={{ maxWidth: 250 }} aria-label="simple table" align="left">
-      <TableHead>
-        <TableRow>
-          <TableCell >
-            <Typography sx={{fontWeight: 'bold'}}>Prayers</Typography>
-          </TableCell>
-          <TableCell align="right">
-            <Typography sx={{fontWeight: 'bold'}}>Times</Typography>
-            </TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-      {filteredItems.length > 0? (
-        filteredItems.map(([prayer, time]) => (
-            <TableRow
-                key={prayer}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-                <TableCell component="th" scope="row">
-                    {prayer}
-                </TableCell>
-                <TableCell align="right">{TimeFormatTo12(time)}</TableCell>
-            </TableRow>
-        ))
-    ) : (
-        <TableRow>
-            <TableCell colSpan={2} align="center">
-              <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100px' }}>
-                  <CircularProgress/>
-              </Box>
-            </TableCell>
-        </TableRow>
-    )}
-      </TableBody>
-    </Table>
-  </TableContainer>
+      {filteredItems.length > 0 ? (
+        <ul style=
+            {{ 
+                listStyleType: 'none',
+                padding: 0, 
+                margin: 0, 
+                justifyContent: 'center', 
+                flexWrap: 'wrap', 
+                display: 'flex' 
+            }}>
+                {filteredItems.map(([prayer, time]) => (
+                  <Cards name={prayer} time={TimeFormatTo12(time)}/>
+                ))}
+        </ul>
+          ) : (
+            <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '200px',
+          }}
+        >
+          <CircularProgress sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '20px',
+            color:'white'
+          }}/>
+        </Box>
+        )
+      }
   </div>
   );
 }

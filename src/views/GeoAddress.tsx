@@ -29,9 +29,9 @@ const GeoAddress = () => {
   return (
     <div>
         {address.length > 1? (
-            <p>{`Location: ${address}`}</p>
+            <h3 style={{display: 'flex', justifyContent: 'center'}}>{`Location: ${address}`}</h3>
         ) : (
-            <p>Location: Loading...</p>
+            <p style={{display: 'flex', justifyContent: 'center'}}>Location: Loading...</p>
         )}
     </div>
   )
