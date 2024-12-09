@@ -16,6 +16,7 @@ export enum apiURL {
 export enum apiEndpoint {
     LOCATION_BASE = 'v1/timings/',
     ADDRESS_BASE  = 'v1/timingsByAddress/',
+    METHODS_BASE = 'v1/methods',
     GOOGLE_ADDRESS_BASE = 'maps/api/geocode/',
     OPEN_STREET_BASE='reverse?'
 }

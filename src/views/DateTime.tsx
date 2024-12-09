@@ -11,7 +11,8 @@ const DateTime = () => {
     }, [])
 
     return (
-        <div>
+        <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}
+>
             <h2 className="date">
                 {date.toLocaleDateString("en-US", {
                     year: "numeric",
@@ -19,14 +20,14 @@ const DateTime = () => {
                     day: "numeric"
                 })}
             </h2>
-            <h2 className="time">
+            <h1 className="time" style={{fontSize: '60px', color: 'GrayText'}}>
                 {date.toLocaleTimeString("en-US", {
                     hour: "numeric",
                     minute: "numeric",
                     second: "numeric",
                     hour12: true
                 })}
-            </h2>
+            </h1>
         </div>
     );    
 }
