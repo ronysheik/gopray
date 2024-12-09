@@ -7,6 +7,7 @@ import { useLocation } from "../hooks/useLocation";
 
 interface FecthDataContextProps {
     data: TimingData | undefined;
+    methods: any;
 }
 
 export const FetchDataContext = createContext<FecthDataContextProps | undefined>(undefined);
@@ -17,9 +18,10 @@ interface FetchDataProviderProps{
 
 export function FetchDataProvider({children}: FetchDataProviderProps) {
     const {latitude, longitude } = useLocation(); 
-    const {getPrayerTimesLocation} = useFetchData();
+    const {getPrayerTimesLocation, getCalculationMethods} = useFetchData();
     
     const [data, SetData] = useState<TimingData>();
+    const [methods, SetMethods] = useState<any>();
 
     console.log('lat', latitude);
    
@@ -27,8 +29,11 @@ export function FetchDataProvider({children}: FetchDataProviderProps) {
         (async (): Promise<void>  => {
             try {
                 const data = await getPrayerTimesLocation(latitude, longitude);
-                if (data !== undefined) {
+                const methods =  await getCalculationMethods();
+                console.log('from Ctx: ', methods);
+                if (data !== undefined || methods !== undefined) {
                   SetData(data);
+                  SetMethods(methods);
                 }
             } catch (error) {
                 console.error('Error in fetchPrayerTimes:', error);
@@ -37,7 +42,7 @@ export function FetchDataProvider({children}: FetchDataProviderProps) {
       }, [latitude, longitude])
 
     return (
-        <FetchDataContext.Provider value={{data}}>
+        <FetchDataContext.Provider value={{data, methods}}>
             {children}
         </FetchDataContext.Provider>
     );

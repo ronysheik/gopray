@@ -5,11 +5,10 @@ import DateTime from './views/DateTime';
 import PrayersTable from './views/PrayersTable';
 import IslamicCalendar from './views/IslamicCalendar';
 import RelatedResources from './views/RelatedResources';
-import { Button } from '@mui/material';
 import GeoAddress from './views/GeoAddress';
 import { FetchDataProvider } from './contexts/FetchDataContext';
-import Cards from './views/Cards';
-
+import Dropdowns from './views/DropDowns';
+import CalculationMethod from './views/CalculationMethods';
 
 function App() {
 
@@ -19,20 +18,20 @@ function App() {
         <div>
         <h1>Islamic Prayers</h1>
           <DateTime></DateTime>
-          <GeoAddress></GeoAddress>
         </div>
       </header>
       <body>
         <li style={{listStyle: 'none'}}>
           <FetchDataProvider>
-               <PrayersTable />
+              <PrayersTable />
               <IslamicCalendar />
+              <CalculationMethod />
           </FetchDataProvider>
+          <GeoAddress></GeoAddress>
           <RelatedResources></RelatedResources>
         </li>
       </body>
     </div>
-      
   );
 }
 
