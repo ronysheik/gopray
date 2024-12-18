@@ -18,7 +18,9 @@ export default function MethodSelect(props: MethodSelectProps) {
   }
 
   const handleChange = (event: SelectChangeEvent) => {
-    setMethod(event.target.value as string);
+    const selectedMethod = event.target.value as string;
+    setMethod(selectedMethod);
+    fetchDataContext.updatePrayer(selectedMethod);
   };
 
   return (

@@ -5,7 +5,7 @@ import { apiEndpoint, apiURL } from "../views/Constants";
 interface UseFetchDataReturnProps{
     getPrayerTimesLocation: (lat: string, lon: string, method?: string) => Promise<TimingData | undefined>;
     getGeoAddress: (lat: string, lon: string) => Promise<void>;
-    getCalculationMethods: () => Promise<void>;
+    getCalculationMethods: () => Promise<any>;
 }
 
 const useFetchData = (): UseFetchDataReturnProps => {
@@ -50,7 +50,7 @@ const useFetchData = (): UseFetchDataReturnProps => {
             console.error('Error fetching data:', err as AxiosError);
         }
     }
-    const getGeoAddress = async(lat: string, lon: string) : Promise<void> => {
+    const getGeoAddress = async(lat: string, lon: string) : Promise<any> => {
         const api = getApiInstance(apiURL.OPEN_STREET_URL, apiEndpoint.OPEN_STREET_BASE);
         try{
             const response = await api.get(`format=json&lat=${lat}&lon=${lon}`);
