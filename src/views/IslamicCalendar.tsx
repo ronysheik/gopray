@@ -28,7 +28,7 @@ export default function IslamicCalendar() {
             }}>
                 {hijriInfo.hijri.date.length > 0 ? (
                     <Typography sx={{fontWeight: 'bold', fontSize: '25px'}}>
-                        {'AH '}{hijriInfo.hijri.year} {hijriInfo.hijri.day} {hijriInfo.hijri.month.en} {', '}{hijriInfo.hijri.weekday.en}
+                        {hijriInfo.hijri.day} {hijriInfo.hijri.month.en} {'AH '}{hijriInfo.hijri.year} {', '}{hijriInfo.hijri.weekday.en}
                     </Typography>
             ) : (
                     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100px'}}>

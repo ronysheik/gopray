@@ -17,10 +17,11 @@ const DateTime = () => {
                 {date.toLocaleDateString("en-US", {
                     year: "numeric",
                     month: "long",
-                    day: "numeric"
+                    day: "numeric",
+                    weekday: "long"
                 })}
             </h2>
-            <h1 className="time" style={{fontSize: '60px', color: 'GrayText'}}>
+            <h1 className="time" style={{fontSize: '70px', color: 'GrayText'}}>
                 {date.toLocaleTimeString("en-US", {
                     hour: "numeric",
                     minute: "numeric",
