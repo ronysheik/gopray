@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Timings } from '../interfaces/prayers';
 import { additional } from './Constants';
 import TimeFormatTo12 from '../helpers/TimeFormatTo12';
-import { Box, CircularProgress, Typography } from '@mui/material';
+import { Box, CircularProgress } from '@mui/material';
 import { FetchDataContext } from '../contexts/FetchDataContext';
 import Cards from './Cards';
 
